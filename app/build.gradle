@@ -28,7 +28,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.luna"
+        applicationId "com.justeattakeaway"
         minSdkVersion 24
         targetSdkVersion 33
         versionCode 1

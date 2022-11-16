@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.luna">
+    package="com.just_eat_take_away">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera.any" />
@@ -11,14 +11,14 @@
         android:maxSdkVersion="28" />
 
     <application
-        android:name="com.luna.core.application.App"
+        android:name="com.just_eat_take_away.core.application.App"
         android:allowBackup="true"
-        android:icon="@drawable/luna"
+        android:icon="@drawable/tenbis_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/luna"
+        android:roundIcon="@drawable/tenbis_logo"
         android:supportsRtl="false">
         <activity
-            android:name="com.luna.ui.activity.ApplicationActivity"
+            android:name="com.just_eat_take_away.ui.activity.ApplicationActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight"
