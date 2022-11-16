@@ -1,0 +1,81 @@
+{
+  "restaurants": [
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_sushi.jpg",
+      "id": 30190,
+      "minimumOrder": 201,
+      "name": "Liam place",
+      "open": true
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_fish.jpg",
+      "id": 99285,
+      "minimumOrder": 213,
+      "name": "Emma place",
+      "open": false
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_humus.jpg",
+      "id": 17220,
+      "minimumOrder": 95,
+      "name": "Noah place",
+      "open": true
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_fish.jpg",
+      "id": 12713,
+      "minimumOrder": 123,
+      "name": "Olivia place",
+      "open": true
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_asian.jpg",
+      "id": 28116,
+      "minimumOrder": 229,
+      "name": "William place",
+      "open": true
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_cafe.jpg",
+      "id": 10902,
+      "minimumOrder": 133,
+      "name": "Ava place",
+      "open": false
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_burgers.jpg",
+      "id": 65500,
+      "minimumOrder": 47,
+      "name": "James place",
+      "open": true
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_fish.jpg",
+      "id": 1514,
+      "minimumOrder": 108,
+      "name": "Isabella place",
+      "open": false
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_american.jpg",
+      "id": 42799,
+      "minimumOrder": 142,
+      "name": "Oliver place",
+      "open": false
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_humus.jpg",
+      "id": 68641,
+      "minimumOrder": 109,
+      "name": "Sophia place",
+      "open": false
+    },
+    {
+      "coverImageUrl": "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_burgers.jpg",
+      "id": 40561,
+      "minimumOrder": 233,
+      "name": "Benjamin place",
+      "open": false
+    }
+  ]
+}

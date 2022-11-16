@@ -1,4 +1,4 @@
-package com.just_eat_take_away.di
+package com.just_eat_take_away.di.providing
 
 import android.app.Application
 import android.content.Context

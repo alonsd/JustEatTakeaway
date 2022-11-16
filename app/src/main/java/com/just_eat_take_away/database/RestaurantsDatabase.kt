@@ -2,7 +2,7 @@ package com.just_eat_take_away.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.just_eat_take_away.data.source.dao.RestaurantDao
+import com.just_eat_take_away.data.source.local.RestaurantDao
 import com.just_eat_take_away.model.database_entities.FavoriteRestaurantEntity
 
 

@@ -1,4 +1,4 @@
-package com.just_eat_take_away.di
+package com.just_eat_take_away.di.binding
 
 import com.just_eat_take_away.data.repository.JustEatTakeawayRepository
 import com.just_eat_take_away.data.repository.JustEatTakeawayRepositoryImpl
