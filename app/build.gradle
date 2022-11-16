@@ -142,6 +142,13 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     kapt "com.google.dagger:hilt-compiler:2.44"
 
+    //Room components
+    implementation 'androidx.room:room-runtime:2.4.3'
+    implementation 'androidx.room:room-ktx:2.4.3'
+    kapt 'androidx.room:room-compiler:2.4.3'
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
     //Compose Destinations
     implementation 'io.github.raamcosta.compose-destinations:animations-core:1.5.1-beta'
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.5.1-beta'
