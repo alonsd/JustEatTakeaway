@@ -2,7 +2,9 @@ package com.just_eat_take_away.ui.screens.dashboard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.haroldadmin.cnradapter.NetworkResponse
 import com.just_eat_take_away.data.repository.JustEatTakeawayRepository
+import com.just_eat_take_away.model.ui_models.DashboardRestaurantModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -25,7 +27,16 @@ class DashboardViewModel @Inject constructor(
     }
 
     private fun getRestaurants() = viewModelScope.launch {
-        val response = justEatTakeawayRepository.getRestaurants()
+        when (val response = justEatTakeawayRepository.getRestaurants()) {
+            is NetworkResponse.Success -> {
+                submitUiState(_uiState.value.copy(state = UiState.State.Data, dashboardRestaurantModels = response.body))
+            }
+            is NetworkResponse.Error -> {
+                val message = response.error.message ?: return@launch
+                submitUiState(_uiState.value.copy(state = UiState.State.Error, errorMessage = message))
+            }
+            else -> Unit
+        }
     }
 
 
@@ -55,11 +66,13 @@ class DashboardViewModel @Inject constructor(
 
     data class UiState(
         val state: State = State.Initial,
+        val dashboardRestaurantModels: List<DashboardRestaurantModel> = emptyList(),
         var errorMessage: String = ""
     ) {
         enum class State {
             Error,
             Initial,
+            Data,
         }
     }
 }
