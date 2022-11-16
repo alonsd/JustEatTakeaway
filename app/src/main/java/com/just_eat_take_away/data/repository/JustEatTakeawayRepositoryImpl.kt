@@ -18,7 +18,7 @@ class JustEatTakeawayRepositoryImpl @Inject constructor(
             return NetworkResponse.ServerError(body = restaurantsResponse.error.localizedMessage, code = 400)
         val favoriteRestaurants = localDataSource.getFavoriteRestaurants()
         val dashboardRestaurants = mutableListOf<DashboardRestaurantModel>()
-        (restaurantsResponse as NetworkResponse.Success).body.forEach { responseModel ->
+        (restaurantsResponse as NetworkResponse.Success).body.restaurants.forEach { responseModel ->
             val isFavorite = favoriteRestaurants.find { it.id == responseModel.id } != null
             val model = DashboardRestaurantModel(
                 responseModel.id,

@@ -21,6 +21,11 @@ class DashboardViewModel @Inject constructor(
 
     init {
         observeUiEvents()
+        getRestaurants()
+    }
+
+    private fun getRestaurants() = viewModelScope.launch {
+        val response = justEatTakeawayRepository.getRestaurants()
     }
 
 
@@ -50,7 +55,7 @@ class DashboardViewModel @Inject constructor(
 
     data class UiState(
         val state: State = State.Initial,
-        var errorMessage : String = ""
+        var errorMessage: String = ""
     ) {
         enum class State {
             Error,
