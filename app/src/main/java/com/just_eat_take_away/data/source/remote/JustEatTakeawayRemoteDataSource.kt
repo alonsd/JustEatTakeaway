@@ -5,5 +5,5 @@ import com.just_eat_take_away.model.server_models.RestaurantsResponseModel
 
 interface JustEatTakeawayRemoteDataSource {
 
-    suspend fun getRestaurants() : NetworkResponse<RestaurantsResponseModel, String>
+    suspend fun getRestaurants(): NetworkResponse<RestaurantsResponseModel, String>
 }

@@ -1,12 +1,11 @@
 package com.just_eat_take_away.ui.screens.dashboard.viewmodel
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.haroldadmin.cnradapter.NetworkResponse
-import com.just_eat_take_away.R
 import com.just_eat_take_away.data.repository.JustEatTakeawayRepository
 import com.just_eat_take_away.model.ui_models.DashboardRestaurantModel
+import com.just_eat_take_away.model.ui_models.DataSourceType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -49,7 +48,8 @@ class DashboardViewModel @Inject constructor(
                     updateFavorites(event)
                 }
                 is UiEvent.MenuItemClicked -> {
-                    submitUiState(_uiState.value.copy(selectedDataSourceName = event.selectedDataSourceName))
+                    justEatTakeawayRepository.changeDataSource(event.dataSourceType)
+                    submitUiState(_uiState.value.copy(dataSourceType = event.dataSourceType))
                 }
             }
         }
@@ -70,13 +70,13 @@ class DashboardViewModel @Inject constructor(
 
     sealed interface UiEvent {
         data class ListItemClicked(val restaurantId : Int, val isFavorite : Boolean) : UiEvent
-        data class MenuItemClicked(@StringRes val selectedDataSourceName : Int) : UiEvent
+        data class MenuItemClicked(val dataSourceType: DataSourceType) : UiEvent
     }
 
     data class UiState(
         val state: State = State.Initial,
         val dashboardRestaurantModels: List<DashboardRestaurantModel> = emptyList(),
-        @StringRes val selectedDataSourceName : Int = R.string.dashboard_screen_top_bar_network_data,
+        val dataSourceType: DataSourceType = DataSourceType.NETWORK_DATA,
         var errorMessage: String = ""
     ) {
         enum class State {

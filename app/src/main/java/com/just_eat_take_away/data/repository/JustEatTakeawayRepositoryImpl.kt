@@ -4,6 +4,7 @@ import com.haroldadmin.cnradapter.NetworkResponse
 import com.just_eat_take_away.data.source.local.JustEatTakeawayLocalDataSource
 import com.just_eat_take_away.data.source.remote.JustEatTakeawayRemoteDataSource
 import com.just_eat_take_away.model.ui_models.DashboardRestaurantModel
+import com.just_eat_take_away.model.ui_models.DataSourceType
 import javax.inject.Inject
 
 class JustEatTakeawayRepositoryImpl @Inject constructor(
@@ -32,6 +33,15 @@ class JustEatTakeawayRepositoryImpl @Inject constructor(
     override suspend fun updateFavoriteRestaurant(restaurantId: Int, isFavorite: Boolean) {
         localDataSource.updateFavoriteRestaurant(restaurantId, insertToDatabase = isFavorite)
     }
+
+    override suspend fun changeDataSource(dataSourceType: DataSourceType) {
+        if (dataSourceType == DataSourceType.NETWORK_DATA) {
+            getRestaurants()
+            return
+        }
+        localDataSource.getMockedDataRestaurants(dataSourceType)
+    }
+
 
 }
 

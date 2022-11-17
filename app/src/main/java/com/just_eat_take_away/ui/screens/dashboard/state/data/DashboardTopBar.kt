@@ -1,6 +1,5 @@
 package com.just_eat_take_away.ui.screens.dashboard.state.data
 
-import androidx.annotation.StringRes
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -8,13 +7,24 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.just_eat_take_away.R
+import com.just_eat_take_away.model.ui_models.DataSourceType
 
 @Composable
 fun DashboardTopBar(
-    @StringRes selectedDataSourceName: Int,
-    onMenuItemClicked: (selectedDataSourceName: Int) -> Unit
+    dataSourceType: DataSourceType,
+    onMenuItemClicked: (dataSourceType: DataSourceType) -> Unit
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
+
+    val networkDataName = R.string.dashboard_screen_top_bar_network_data
+    val dbJsonDataName = R.string.dashboard_screen_top_bar_db_json_mocked_data
+    val mockedRestaurantsDataName = R.string.dashboard_screen_top_bar_mocked_restaurants_data
+
+    val selectedDataSourceName = when (dataSourceType) {
+        DataSourceType.NETWORK_DATA -> networkDataName
+        DataSourceType.DB_JSON -> dbJsonDataName
+        DataSourceType.MOCKED_RESTAURANTS -> mockedRestaurantsDataName
+    }
 
     TopAppBar(
         title = {
@@ -31,32 +41,41 @@ fun DashboardTopBar(
             ) {
 
                 DropdownMenuItem(onClick = {
-                    onMenuItemClicked(R.string.dashboard_screen_top_bar_network_data)
+                    onDropdownItemClicked(dataSourceType, DataSourceType.NETWORK_DATA, onMenuItemClicked)
                     menuExpanded = menuExpanded.not()
                 }) {
-                    Text(text = stringResource(id = R.string.dashboard_screen_top_bar_network_data))
+                    Text(text = stringResource(id = networkDataName))
                 }
 
                 DropdownMenuItem(onClick = {
-                    onMenuItemClicked(R.string.dashboard_screen_top_bar_db_json_mocked_data)
+                    onDropdownItemClicked(dataSourceType, DataSourceType.DB_JSON, onMenuItemClicked)
                     menuExpanded = menuExpanded.not()
                 }) {
-                    Text(text = stringResource(R.string.dashboard_screen_top_bar_db_json_mocked_data))
+                    Text(text = stringResource(dbJsonDataName))
                 }
 
                 DropdownMenuItem(onClick = {
-                    onMenuItemClicked(R.string.dashboard_screen_top_bar_mocked_restaurants_data)
+                    onDropdownItemClicked(dataSourceType, DataSourceType.MOCKED_RESTAURANTS, onMenuItemClicked)
                     menuExpanded = menuExpanded.not()
                 }) {
-                    Text(text = stringResource(R.string.dashboard_screen_top_bar_mocked_restaurants_data))
+                    Text(text = stringResource(mockedRestaurantsDataName))
                 }
             }
         }
     )
 }
 
+private fun onDropdownItemClicked(
+    currentDataSourceName: DataSourceType,
+    selectedDataSourceType: DataSourceType,
+    onMenuItemClicked: (dataSourceType: DataSourceType) -> Unit
+) {
+    if (currentDataSourceName == selectedDataSourceType) return
+    onMenuItemClicked(selectedDataSourceType)
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DashboardTopBarPreview() {
-    DashboardTopBar(R.string.dashboard_screen_top_bar_network_data) {}
+    DashboardTopBar(dataSourceType = DataSourceType.NETWORK_DATA) {}
 }
