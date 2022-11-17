@@ -24,7 +24,7 @@ class JustEatTakeawayLocalDataSourceImpl @Inject constructor(
         restaurantDao.deleteFavoriteRestaurant(restaurantId)
     }
 
-    override suspend fun getMockedDataRestaurants(dataSourceType: DataSourceType): RestaurantsResponseModel? {
+    override suspend fun getMockedDataRestaurants(dataSourceType: DataSourceType): RestaurantsResponseModel {
         val fileName = when (dataSourceType) {
             DataSourceType.DB_JSON -> {
                 "mocked_data/db.json"
@@ -32,10 +32,10 @@ class JustEatTakeawayLocalDataSourceImpl @Inject constructor(
             DataSourceType.MOCKED_RESTAURANTS -> {
                 "mocked_data/mocked_restaurants.json"
             }
-            else -> return null
+            DataSourceType.NETWORK_DATA -> "" // Case is treated at repository level
         }
         val json = context.assets.readAssetsFile(fileName)
-        return Gson().fromJson(json, RestaurantsResponseModel::class.java)
+        return Gson().fromJson(json, RestaurantsResponseModel::class.java)!!
     }
 
 }

@@ -10,5 +10,5 @@ interface JustEatTakeawayRepository {
 
     suspend fun updateFavoriteRestaurant(restaurantId: Int, isFavorite :Boolean)
 
-    suspend fun changeDataSource(dataSourceType: DataSourceType)
+    suspend fun changeDataSource(dataSourceType: DataSourceType) : NetworkResponse<List<DashboardRestaurantModel>, String>
 }

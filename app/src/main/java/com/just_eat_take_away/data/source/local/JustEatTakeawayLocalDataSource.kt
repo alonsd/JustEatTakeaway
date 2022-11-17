@@ -10,6 +10,6 @@ interface JustEatTakeawayLocalDataSource {
 
     suspend fun updateFavoriteRestaurant(restaurantId: Int, insertToDatabase :Boolean)
 
-    suspend fun getMockedDataRestaurants(dataSourceType: DataSourceType): RestaurantsResponseModel?
+    suspend fun getMockedDataRestaurants(dataSourceType: DataSourceType): RestaurantsResponseModel
 
 }
