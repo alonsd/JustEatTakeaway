@@ -2,5 +2,8 @@
 
     <!--    App Name-->
     <string name="app_name">JustEatTakeaway</string>
+    <string name="dashboard_screen_top_bar_network_data">Network Data</string>
+    <string name="dashboard_screen_top_bar_db_json_mocked_data">db.json</string>
+    <string name="dashboard_screen_top_bar_mocked_restaurants_data">mocked_restaurants.json</string>
 
 </resources>

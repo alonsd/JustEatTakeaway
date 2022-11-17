@@ -36,9 +36,15 @@ fun DashboardScreen(
             GenericLoadingState()
         }
         DashboardViewModel.UiState.State.Data -> {
-            DashboardDataState(dashboardRestaurantModels = uiState.dashboardRestaurantModels) { restaurantId, isFavorite ->
-                viewModel.submitEvent(DashboardViewModel.UiEvent.ListItemClicked(restaurantId, isFavorite))
-            }
+            DashboardDataState(
+                dashboardRestaurantModels = uiState.dashboardRestaurantModels,
+                selectedDataSourceName = uiState.selectedDataSourceName,
+                onRestaurantClicked = { restaurantId, isFavorite ->
+                    viewModel.submitEvent(DashboardViewModel.UiEvent.ListItemClicked(restaurantId, isFavorite))
+                },
+                onMenuItemClicked = { selectedDataSourceName ->
+                    viewModel.submitEvent(DashboardViewModel.UiEvent.MenuItemClicked(selectedDataSourceName))
+                })
         }
     }
 }
