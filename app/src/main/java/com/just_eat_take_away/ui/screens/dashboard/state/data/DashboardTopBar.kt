@@ -25,11 +25,15 @@ fun DashboardTopBar(
         DataSourceType.DB_JSON -> dbJsonDataName
         DataSourceType.MOCKED_RESTAURANTS -> mockedRestaurantsDataName
     }
+    TopAppBar(backgroundColor = MaterialTheme.colors.background) {
+
+    }
 
     TopAppBar(
         title = {
             Text(stringResource(selectedDataSourceName), color = MaterialTheme.colors.onSecondary)
-        }, backgroundColor = MaterialTheme.colors.secondary,
+        },
+        backgroundColor = MaterialTheme.colors.background,
         actions = {
             IconButton(onClick = { menuExpanded = menuExpanded.not() }) {
                 Icon(Icons.Default.MoreVert, "")

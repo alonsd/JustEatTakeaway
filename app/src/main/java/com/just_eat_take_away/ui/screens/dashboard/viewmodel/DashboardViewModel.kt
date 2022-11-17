@@ -22,6 +22,8 @@ class DashboardViewModel @Inject constructor(
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     private val uiEvent = _uiEvent.asSharedFlow()
 
+    private var reloadingDataInProgress = false
+
     init {
         observeUiEvents()
         getRestaurants()
@@ -45,9 +47,13 @@ class DashboardViewModel @Inject constructor(
         uiEvent.collect { event ->
             when (event) {
                 is UiEvent.ListItemClicked -> {
+                    if (reloadingDataInProgress) return@collect
+                    reloadingDataInProgress = true
                     updateFavorites(event)
                 }
                 is UiEvent.MenuItemClicked -> {
+                    if (reloadingDataInProgress) return@collect
+                    reloadingDataInProgress = true
                     reloadData(event.dataSourceType)
                 }
             }
@@ -63,10 +69,12 @@ class DashboardViewModel @Inject constructor(
                         dataSourceType = dataSourceType
                     )
                 )
+                reloadingDataInProgress = false
             }
             is NetworkResponse.Error -> {
                 val message = response.error.message ?: return@launch
                 submitUiState(_uiState.value.copy(state = UiState.State.Error, errorMessage = message))
+                reloadingDataInProgress = false
             }
             else -> Unit
         }

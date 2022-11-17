@@ -2,6 +2,8 @@ package com.just_eat_take_away.data.source.local
 
 import android.content.Context
 import com.google.gson.Gson
+import com.just_eat_take_away.core.constants.assets_constants.AssetsConstants.DB_JSON_FILE
+import com.just_eat_take_away.core.constants.assets_constants.AssetsConstants.MOCKED_RESTAURANTS_FILE
 import com.just_eat_take_away.core.extensions.readAssetsFile
 import com.just_eat_take_away.model.database_entities.FavoriteRestaurantEntity
 import com.just_eat_take_away.model.server_models.RestaurantsResponseModel
@@ -26,12 +28,8 @@ class JustEatTakeawayLocalDataSourceImpl @Inject constructor(
 
     override suspend fun getMockedDataRestaurants(dataSourceType: DataSourceType): RestaurantsResponseModel {
         val fileName = when (dataSourceType) {
-            DataSourceType.DB_JSON -> {
-                "mocked_data/db.json"
-            }
-            DataSourceType.MOCKED_RESTAURANTS -> {
-                "mocked_data/mocked_restaurants.json"
-            }
+            DataSourceType.DB_JSON ->  DB_JSON_FILE
+            DataSourceType.MOCKED_RESTAURANTS -> MOCKED_RESTAURANTS_FILE
             DataSourceType.NETWORK_DATA -> "" // Case is treated at repository level
         }
         val json = context.assets.readAssetsFile(fileName)
