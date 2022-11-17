@@ -25,7 +25,7 @@ class JustEatTakeawayRepositoryImpl @Inject constructor(
         localDataSource.updateFavoriteRestaurant(restaurantId, insertToDatabase = isFavorite)
     }
 
-    override suspend fun changeDataSource(dataSourceType: DataSourceType): NetworkResponse<List<DashboardRestaurantModel>, String> {
+    override suspend fun reloadData(dataSourceType: DataSourceType): NetworkResponse<List<DashboardRestaurantModel>, String> {
         if (dataSourceType == DataSourceType.NETWORK_DATA) {
             return getRestaurants()
         }

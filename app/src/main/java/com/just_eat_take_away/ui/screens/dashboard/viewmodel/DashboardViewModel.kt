@@ -48,14 +48,14 @@ class DashboardViewModel @Inject constructor(
                     updateFavorites(event)
                 }
                 is UiEvent.MenuItemClicked -> {
-                    changeDataSource(event.dataSourceType)
+                    reloadData(event.dataSourceType)
                 }
             }
         }
     }
 
-    private suspend fun changeDataSource(dataSourceType : DataSourceType) = viewModelScope.launch {
-        when (val response = justEatTakeawayRepository.changeDataSource(dataSourceType)) {
+    private suspend fun reloadData(dataSourceType : DataSourceType) = viewModelScope.launch {
+        when (val response = justEatTakeawayRepository.reloadData(dataSourceType)) {
             is NetworkResponse.Success -> {
                 submitUiState(
                     _uiState.value.copy(
@@ -74,7 +74,7 @@ class DashboardViewModel @Inject constructor(
 
     private suspend fun updateFavorites(event: UiEvent.ListItemClicked) {
         justEatTakeawayRepository.updateFavoriteRestaurant(event.restaurantId, event.isFavorite)
-        getRestaurants()
+        reloadData(_uiState.value.dataSourceType)
     }
 
     private fun submitUiState(uiState: UiState) {
