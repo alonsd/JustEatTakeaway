@@ -43,11 +43,16 @@ class DashboardViewModel @Inject constructor(
     private fun observeUiEvents() = viewModelScope.launch {
         uiEvent.collect { event ->
             when (event) {
-                UiEvent.DeviceTiltSubmitButtonClicked -> {}
-                UiEvent.OnFaceRecognized -> {}
-                UiEvent.StartButtonClicked -> {}
+                is UiEvent.ListItemClicked -> {
+                    updateFavorites(event)
+                }
             }
         }
+    }
+
+    private suspend fun updateFavorites(event: UiEvent.ListItemClicked) {
+        justEatTakeawayRepository.updateFavoriteRestaurant(event.restaurantId, event.isFavorite)
+        getRestaurants()
     }
 
     private fun submitUiState(uiState: UiState) {
@@ -59,9 +64,7 @@ class DashboardViewModel @Inject constructor(
     }
 
     sealed interface UiEvent {
-        object StartButtonClicked : UiEvent
-        object DeviceTiltSubmitButtonClicked : UiEvent
-        object OnFaceRecognized : UiEvent
+        data class ListItemClicked(val restaurantId : Int, val isFavorite : Boolean) : UiEvent
     }
 
     data class UiState(

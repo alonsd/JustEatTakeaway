@@ -2,6 +2,7 @@ package com.just_eat_take_away.ui.screens.dashboard.screen
 
 import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,6 +18,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 @RootNavGraph(start = true)
 @ExperimentalComposeUiApi
 @ExperimentalGetImage
+@ExperimentalMaterialApi
 @Destination
 @Composable
 fun DashboardScreen(
@@ -34,8 +36,8 @@ fun DashboardScreen(
             GenericLoadingState()
         }
         DashboardViewModel.UiState.State.Data -> {
-            DashboardDataState(dashboardRestaurantModels = uiState.dashboardRestaurantModels) { restaurantId ->
-
+            DashboardDataState(dashboardRestaurantModels = uiState.dashboardRestaurantModels) { restaurantId, isFavorite ->
+                viewModel.submitEvent(DashboardViewModel.UiEvent.ListItemClicked(restaurantId, isFavorite))
             }
         }
     }

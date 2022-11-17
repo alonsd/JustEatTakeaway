@@ -2,10 +2,7 @@ package com.just_eat_take_away.ui.screens.dashboard.state.data
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.MaterialTheme
@@ -19,13 +16,16 @@ import coil.compose.rememberAsyncImagePainter
 import com.just_eat_take_away.R
 import com.just_eat_take_away.model.ui_models.DashboardRestaurantModel
 
+@ExperimentalMaterialApi
 @Composable
 fun RestaurantListItem(
     modifier: Modifier = Modifier,
     model: DashboardRestaurantModel,
-    onRestaurantClicked: (restaurantId: Int) -> Unit
+    onRestaurantClicked: (restaurantId: Int, isFavorite: Boolean) -> Unit
 ) {
-    Card(modifier = modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+    Card(modifier = modifier.padding(horizontal = 16.dp, vertical = 4.dp), onClick = {
+        onRestaurantClicked(model.restaurantId, model.isFavorite.not())
+    }) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -51,22 +51,21 @@ fun RestaurantListItem(
                 Text(
                     text = model.restaurantName
                 )
-                IconButton(
-                    onClick = {
-                        onRestaurantClicked(model.id)
+                IconButton(onClick = {}) {
+                    if (model.isFavorite) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = "",
+                            tint = MaterialTheme.colorScheme.outline
+                        )
                     }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "",
-                        tint = MaterialTheme.colorScheme.outline
-                    )
                 }
             }
         }
     }
 }
 
+@ExperimentalMaterialApi
 @Preview(showBackground = true)
 @Composable
 fun RestaurantListItemPreview() {
@@ -75,5 +74,5 @@ fun RestaurantListItemPreview() {
             1,
             "https://tenbis-static.azureedge.net/restaurant-default-header-image/CuzineType_sushi.jpg",
             "Sushi Bar",
-        ), onRestaurantClicked = {})
+        ), onRestaurantClicked = { _, _ -> })
 }

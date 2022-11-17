@@ -10,5 +10,14 @@ class JustEatTakeawayLocalDataSourceImpl @Inject constructor(
     override suspend fun getFavoriteRestaurants(): List<FavoriteRestaurantEntity> =
         restaurantDao.getFavoriteRestaurants()
 
+    override suspend fun updateFavoriteRestaurant(restaurantId: Int, insertToDatabase: Boolean) {
+        if (insertToDatabase) {
+            restaurantDao.insertFavoriteRestaurant(FavoriteRestaurantEntity(restaurantId))
+            return
+        }
+        restaurantDao.deleteFavoriteRestaurant(restaurantId)
+
+    }
+
 
 }

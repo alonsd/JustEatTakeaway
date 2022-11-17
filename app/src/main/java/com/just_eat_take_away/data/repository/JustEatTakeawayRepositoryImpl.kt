@@ -1,6 +1,5 @@
 package com.just_eat_take_away.data.repository
 
-import android.util.Log
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.just_eat_take_away.data.source.local.JustEatTakeawayLocalDataSource
 import com.just_eat_take_away.data.source.remote.JustEatTakeawayRemoteDataSource
@@ -27,10 +26,11 @@ class JustEatTakeawayRepositoryImpl @Inject constructor(
             )
             dashboardRestaurants.add(model)
         }
-        dashboardRestaurants.forEach {
-            Log.d("defaultAppDebuger", "restaurant: $it")
-        }
         return NetworkResponse.Success(dashboardRestaurants, code = 200)
+    }
+
+    override suspend fun updateFavoriteRestaurant(restaurantId: Int, isFavorite: Boolean) {
+        localDataSource.updateFavoriteRestaurant(restaurantId, insertToDatabase = isFavorite)
     }
 
 }
