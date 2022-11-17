@@ -1,7 +1,6 @@
 package com.just_eat_take_away.ui.screens.dashboard.screen
 
 import android.widget.Toast
-import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,7 +16,6 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 
 @RootNavGraph(start = true)
 @ExperimentalComposeUiApi
-@ExperimentalGetImage
 @ExperimentalMaterialApi
 @Destination
 @Composable
